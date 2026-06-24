@@ -1,0 +1,52 @@
+{
+  "agent": "investigator",
+  "version": "1.0",
+  "model": "Credit Card Fraud Detector",
+  "total_failures": 18,
+  "top_features": [
+    {
+      "feature": "V14",
+      "mean_abs_shap": 0.0638
+    },
+    {
+      "feature": "V4",
+      "mean_abs_shap": 0.0366
+    },
+    {
+      "feature": "V17",
+      "mean_abs_shap": 0.0278
+    }
+  ],
+  "failure_patterns": [
+    {
+      "feature": "V14",
+      "range": "(-0.446, 1.571]",
+      "failure_count": 7,
+      "failure_rate": 0.389
+    },
+    {
+      "feature": "V14",
+      "range": "(-2.464, -0.446]",
+      "failure_count": 6,
+      "failure_rate": 0.333
+    },
+    {
+      "feature": "V14",
+      "range": "(-4.481, -2.464]",
+      "failure_count": 3,
+      "failure_rate": 0.167
+    },
+    {
+      "feature": "V4",
+      "range": "(3.092, 4.194]",
+      "failure_count": 6,
+      "failure_rate": 0.333
+    },
+    {
+      "feature": "V4",
+      "range": "(1.991, 3.092]",
+      "failure_count": 5,
+      "failure_rate": 0.278
+    }
+  ]
+}

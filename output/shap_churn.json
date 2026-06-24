@@ -1,0 +1,500 @@
+{
+  "model": "churn",
+  "total_failures": 310,
+  "global_top_features": [
+    {
+      "feature": "Contract",
+      "mean_abs_shap": 0.0816
+    },
+    {
+      "feature": "tenure",
+      "mean_abs_shap": 0.0687
+    },
+    {
+      "feature": "OnlineSecurity",
+      "mean_abs_shap": 0.0483
+    },
+    {
+      "feature": "TechSupport",
+      "mean_abs_shap": 0.04
+    },
+    {
+      "feature": "TotalCharges",
+      "mean_abs_shap": 0.0399
+    }
+  ],
+  "failure_patterns": [
+    {
+      "feature": "Contract",
+      "range": "(-0.002, 0.4]",
+      "failure_count": 259,
+      "failure_rate": 0.835
+    },
+    {
+      "feature": "Contract",
+      "range": "(0.8, 1.2]",
+      "failure_count": 43,
+      "failure_rate": 0.139
+    },
+    {
+      "feature": "Contract",
+      "range": "(1.6, 2.0]",
+      "failure_count": 8,
+      "failure_rate": 0.026
+    },
+    {
+      "feature": "tenure",
+      "range": "(0.932, 14.6]",
+      "failure_count": 152,
+      "failure_rate": 0.49
+    },
+    {
+      "feature": "tenure",
+      "range": "(14.6, 28.2]",
+      "failure_count": 62,
+      "failure_rate": 0.2
+    }
+  ],
+  "per_row_shap": [
+    {
+      "row_id": 0,
+      "predicted": 1,
+      "actual": 0,
+      "top_features": [
+        {
+          "feature": "tenure",
+          "shap_value": 0.1076,
+          "feature_value": 7.0
+        },
+        {
+          "feature": "Contract",
+          "shap_value": 0.0972,
+          "feature_value": 0.0
+        },
+        {
+          "feature": "OnlineSecurity",
+          "shap_value": 0.0685,
+          "feature_value": 0.0
+        }
+      ]
+    },
+    {
+      "row_id": 1,
+      "predicted": 0,
+      "actual": 1,
+      "top_features": [
+        {
+          "feature": "OnlineSecurity",
+          "shap_value": -0.0702,
+          "feature_value": 1.0
+        },
+        {
+          "feature": "TechSupport",
+          "shap_value": -0.0645,
+          "feature_value": 1.0
+        },
+        {
+          "feature": "Contract",
+          "shap_value": 0.0625,
+          "feature_value": 0.0
+        }
+      ]
+    },
+    {
+      "row_id": 2,
+      "predicted": 0,
+      "actual": 1,
+      "top_features": [
+        {
+          "feature": "tenure",
+          "shap_value": -0.1346,
+          "feature_value": 60.0
+        },
+        {
+          "feature": "TotalCharges",
+          "shap_value": -0.0813,
+          "feature_value": 6396.45
+        },
+        {
+          "feature": "Contract",
+          "shap_value": 0.0701,
+          "feature_value": 0.0
+        }
+      ]
+    },
+    {
+      "row_id": 3,
+      "predicted": 0,
+      "actual": 1,
+      "top_features": [
+        {
+          "feature": "Contract",
+          "shap_value": 0.0665,
+          "feature_value": 0.0
+        },
+        {
+          "feature": "tenure",
+          "shap_value": -0.0534,
+          "feature_value": 30.0
+        },
+        {
+          "feature": "InternetService",
+          "shap_value": -0.0496,
+          "feature_value": 0.0
+        }
+      ]
+    },
+    {
+      "row_id": 4,
+      "predicted": 0,
+      "actual": 1,
+      "top_features": [
+        {
+          "feature": "tenure",
+          "shap_value": 0.0757,
+          "feature_value": 3.0
+        },
+        {
+          "feature": "Contract",
+          "shap_value": 0.0682,
+          "feature_value": 0.0
+        },
+        {
+          "feature": "OnlineSecurity",
+          "shap_value": 0.0601,
+          "feature_value": 0.0
+        }
+      ]
+    },
+    {
+      "row_id": 5,
+      "predicted": 0,
+      "actual": 1,
+      "top_features": [
+        {
+          "feature": "Contract",
+          "shap_value": -0.0817,
+          "feature_value": 1.0
+        },
+        {
+          "feature": "OnlineSecurity",
+          "shap_value": -0.0629,
+          "feature_value": 2.0
+        },
+        {
+          "feature": "tenure",
+          "shap_value": -0.0502,
+          "feature_value": 48.0
+        }
+      ]
+    },
+    {
+      "row_id": 6,
+      "predicted": 0,
+      "actual": 1,
+      "top_features": [
+        {
+          "feature": "Contract",
+          "shap_value": 0.1047,
+          "feature_value": 0.0
+        },
+        {
+          "feature": "tenure",
+          "shap_value": -0.0742,
+          "feature_value": 38.0
+        },
+        {
+          "feature": "TechSupport",
+          "shap_value": 0.0522,
+          "feature_value": 0.0
+        }
+      ]
+    },
+    {
+      "row_id": 7,
+      "predicted": 0,
+      "actual": 1,
+      "top_features": [
+        {
+          "feature": "tenure",
+          "shap_value": -0.0978,
+          "feature_value": 62.0
+        },
+        {
+          "feature": "Contract",
+          "shap_value": -0.0811,
+          "feature_value": 1.0
+        },
+        {
+          "feature": "TotalCharges",
+          "shap_value": -0.0458,
+          "feature_value": 6383.35
+        }
+      ]
+    },
+    {
+      "row_id": 8,
+      "predicted": 1,
+      "actual": 0,
+      "top_features": [
+        {
+          "feature": "TotalCharges",
+          "shap_value": 0.1784,
+          "feature_value": 19.75
+        },
+        {
+          "feature": "tenure",
+          "shap_value": 0.1684,
+          "feature_value": 1.0
+        },
+        {
+          "feature": "Contract",
+          "shap_value": 0.1131,
+          "feature_value": 0.0
+        }
+      ]
+    },
+    {
+      "row_id": 9,
+      "predicted": 0,
+      "actual": 1,
+      "top_features": [
+        {
+          "feature": "tenure",
+          "shap_value": 0.1045,
+          "feature_value": 1.0
+        },
+        {
+          "feature": "Contract",
+          "shap_value": 0.0821,
+          "feature_value": 0.0
+        },
+        {
+          "feature": "OnlineSecurity",
+          "shap_value": -0.0676,
+          "feature_value": 1.0
+        }
+      ]
+    },
+    {
+      "row_id": 10,
+      "predicted": 1,
+      "actual": 0,
+      "top_features": [
+        {
+          "feature": "tenure",
+          "shap_value": 0.1443,
+          "feature_value": 2.0
+        },
+        {
+          "feature": "TotalCharges",
+          "shap_value": 0.1314,
+          "feature_value": 92.75
+        },
+        {
+          "feature": "Contract",
+          "shap_value": 0.0843,
+          "feature_value": 0.0
+        }
+      ]
+    },
+    {
+      "row_id": 11,
+      "predicted": 1,
+      "actual": 0,
+      "top_features": [
+        {
+          "feature": "Contract",
+          "shap_value": 0.0847,
+          "feature_value": 0.0
+        },
+        {
+          "feature": "tenure",
+          "shap_value": 0.0585,
+          "feature_value": 9.0
+        },
+        {
+          "feature": "OnlineSecurity",
+          "shap_value": 0.0564,
+          "feature_value": 0.0
+        }
+      ]
+    },
+    {
+      "row_id": 12,
+      "predicted": 0,
+      "actual": 1,
+      "top_features": [
+        {
+          "feature": "tenure",
+          "shap_value": -0.0821,
+          "feature_value": 34.0
+        },
+        {
+          "feature": "Contract",
+          "shap_value": 0.0746,
+          "feature_value": 0.0
+        },
+        {
+          "feature": "TotalCharges",
+          "shap_value": -0.0403,
+          "feature_value": 2718.3
+        }
+      ]
+    },
+    {
+      "row_id": 13,
+      "predicted": 0,
+      "actual": 1,
+      "top_features": [
+        {
+          "feature": "Contract",
+          "shap_value": 0.0915,
+          "feature_value": 0.0
+        },
+        {
+          "feature": "tenure",
+          "shap_value": -0.0771,
+          "feature_value": 27.0
+        },
+        {
+          "feature": "TotalCharges",
+          "shap_value": -0.0596,
+          "feature_value": 1893.95
+        }
+      ]
+    },
+    {
+      "row_id": 14,
+      "predicted": 0,
+      "actual": 1,
+      "top_features": [
+        {
+          "feature": "Contract",
+          "shap_value": 0.0888,
+          "feature_value": 0.0
+        },
+        {
+          "feature": "MultipleLines",
+          "shap_value": -0.0455,
+          "feature_value": 0.0
+        },
+        {
+          "feature": "OnlineSecurity",
+          "shap_value": 0.0453,
+          "feature_value": 0.0
+        }
+      ]
+    },
+    {
+      "row_id": 15,
+      "predicted": 0,
+      "actual": 1,
+      "top_features": [
+        {
+          "feature": "MonthlyCharges",
+          "shap_value": -0.0587,
+          "feature_value": 55.2
+        },
+        {
+          "feature": "Contract",
+          "shap_value": 0.0554,
+          "feature_value": 0.0
+        },
+        {
+          "feature": "TechSupport",
+          "shap_value": -0.0546,
+          "feature_value": 2.0
+        }
+      ]
+    },
+    {
+      "row_id": 16,
+      "predicted": 1,
+      "actual": 0,
+      "top_features": [
+        {
+          "feature": "tenure",
+          "shap_value": 0.1861,
+          "feature_value": 1.0
+        },
+        {
+          "feature": "TotalCharges",
+          "shap_value": 0.1198,
+          "feature_value": 70.25
+        },
+        {
+          "feature": "Contract",
+          "shap_value": 0.093,
+          "feature_value": 0.0
+        }
+      ]
+    },
+    {
+      "row_id": 17,
+      "predicted": 0,
+      "actual": 1,
+      "top_features": [
+        {
+          "feature": "Contract",
+          "shap_value": -0.0595,
+          "feature_value": 1.0
+        },
+        {
+          "feature": "OnlineSecurity",
+          "shap_value": -0.0433,
+          "feature_value": 2.0
+        },
+        {
+          "feature": "MonthlyCharges",
+          "shap_value": -0.0357,
+          "feature_value": 64.4
+        }
+      ]
+    },
+    {
+      "row_id": 18,
+      "predicted": 1,
+      "actual": 0,
+      "top_features": [
+        {
+          "feature": "tenure",
+          "shap_value": 0.1366,
+          "feature_value": 2.0
+        },
+        {
+          "feature": "TotalCharges",
+          "shap_value": 0.0906,
+          "feature_value": 117.05
+        },
+        {
+          "feature": "Contract",
+          "shap_value": 0.088,
+          "feature_value": 0.0
+        }
+      ]
+    },
+    {
+      "row_id": 19,
+      "predicted": 0,
+      "actual": 1,
+      "top_features": [
+        {
+          "feature": "Contract",
+          "shap_value": 0.074,
+          "feature_value": 0.0
+        },
+        {
+          "feature": "TotalCharges",
+          "shap_value": -0.0554,
+          "feature_value": 1820.45
+        },
+        {
+          "feature": "InternetService",
+          "shap_value": 0.0451,
+          "feature_value": 1.0
+        }
+      ]
+    }
+  ]
+}

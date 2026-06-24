@@ -1,0 +1,500 @@
+{
+  "model": "loan",
+  "total_failures": 422,
+  "global_top_features": [
+    {
+      "feature": "loan_grade",
+      "mean_abs_shap": 0.079
+    },
+    {
+      "feature": "loan_percent_income",
+      "mean_abs_shap": 0.0727
+    },
+    {
+      "feature": "person_home_ownership",
+      "mean_abs_shap": 0.058
+    },
+    {
+      "feature": "person_income",
+      "mean_abs_shap": 0.0525
+    },
+    {
+      "feature": "loan_int_rate",
+      "mean_abs_shap": 0.0398
+    }
+  ],
+  "failure_patterns": [
+    {
+      "feature": "loan_grade",
+      "range": "(-0.005, 1.0]",
+      "failure_count": 191,
+      "failure_rate": 0.453
+    },
+    {
+      "feature": "loan_grade",
+      "range": "(1.0, 2.0]",
+      "failure_count": 143,
+      "failure_rate": 0.339
+    },
+    {
+      "feature": "loan_grade",
+      "range": "(2.0, 3.0]",
+      "failure_count": 57,
+      "failure_rate": 0.135
+    },
+    {
+      "feature": "loan_grade",
+      "range": "(3.0, 4.0]",
+      "failure_count": 22,
+      "failure_rate": 0.052
+    },
+    {
+      "feature": "loan_grade",
+      "range": "(4.0, 5.0]",
+      "failure_count": 9,
+      "failure_rate": 0.021
+    }
+  ],
+  "per_row_shap": [
+    {
+      "row_id": 0,
+      "predicted": 1,
+      "actual": 0,
+      "top_features": [
+        {
+          "feature": "loan_grade",
+          "shap_value": 0.2557,
+          "feature_value": 3.0
+        },
+        {
+          "feature": "loan_int_rate",
+          "shap_value": 0.1156,
+          "feature_value": 16.77
+        },
+        {
+          "feature": "loan_intent",
+          "shap_value": 0.0977,
+          "feature_value": 3.0
+        }
+      ]
+    },
+    {
+      "row_id": 1,
+      "predicted": 0,
+      "actual": 1,
+      "top_features": [
+        {
+          "feature": "loan_percent_income",
+          "shap_value": -0.1024,
+          "feature_value": 0.03
+        },
+        {
+          "feature": "person_income",
+          "shap_value": 0.0944,
+          "feature_value": 29000.0
+        },
+        {
+          "feature": "loan_grade",
+          "shap_value": -0.0553,
+          "feature_value": 1.0
+        }
+      ]
+    },
+    {
+      "row_id": 2,
+      "predicted": 0,
+      "actual": 1,
+      "top_features": [
+        {
+          "feature": "person_income",
+          "shap_value": 0.1625,
+          "feature_value": 34000.0
+        },
+        {
+          "feature": "person_home_ownership",
+          "shap_value": -0.0432,
+          "feature_value": 0.0
+        },
+        {
+          "feature": "loan_grade",
+          "shap_value": -0.0398,
+          "feature_value": 1.0
+        }
+      ]
+    },
+    {
+      "row_id": 3,
+      "predicted": 0,
+      "actual": 1,
+      "top_features": [
+        {
+          "feature": "person_income",
+          "shap_value": -0.0529,
+          "feature_value": 115000.0
+        },
+        {
+          "feature": "loan_percent_income",
+          "shap_value": -0.0391,
+          "feature_value": 0.09
+        },
+        {
+          "feature": "person_home_ownership",
+          "shap_value": -0.0285,
+          "feature_value": 0.0
+        }
+      ]
+    },
+    {
+      "row_id": 4,
+      "predicted": 1,
+      "actual": 0,
+      "top_features": [
+        {
+          "feature": "loan_grade",
+          "shap_value": 0.286,
+          "feature_value": 4.0
+        },
+        {
+          "feature": "loan_int_rate",
+          "shap_value": 0.1562,
+          "feature_value": 19.03
+        },
+        {
+          "feature": "loan_intent",
+          "shap_value": 0.0767,
+          "feature_value": 3.0
+        }
+      ]
+    },
+    {
+      "row_id": 5,
+      "predicted": 0,
+      "actual": 1,
+      "top_features": [
+        {
+          "feature": "loan_percent_income",
+          "shap_value": -0.0397,
+          "feature_value": 0.1
+        },
+        {
+          "feature": "loan_grade",
+          "shap_value": -0.027,
+          "feature_value": 1.0
+        },
+        {
+          "feature": "person_income",
+          "shap_value": -0.0164,
+          "feature_value": 74000.0
+        }
+      ]
+    },
+    {
+      "row_id": 6,
+      "predicted": 0,
+      "actual": 1,
+      "top_features": [
+        {
+          "feature": "loan_percent_income",
+          "shap_value": -0.0814,
+          "feature_value": 0.16
+        },
+        {
+          "feature": "person_income",
+          "shap_value": 0.0615,
+          "feature_value": 32000.0
+        },
+        {
+          "feature": "loan_intent",
+          "shap_value": -0.0588,
+          "feature_value": 5.0
+        }
+      ]
+    },
+    {
+      "row_id": 7,
+      "predicted": 0,
+      "actual": 1,
+      "top_features": [
+        {
+          "feature": "loan_grade",
+          "shap_value": -0.064,
+          "feature_value": 1.0
+        },
+        {
+          "feature": "person_income",
+          "shap_value": -0.0571,
+          "feature_value": 113000.0
+        },
+        {
+          "feature": "loan_percent_income",
+          "shap_value": -0.0437,
+          "feature_value": 0.09
+        }
+      ]
+    },
+    {
+      "row_id": 8,
+      "predicted": 1,
+      "actual": 0,
+      "top_features": [
+        {
+          "feature": "loan_grade",
+          "shap_value": 0.2693,
+          "feature_value": 5.0
+        },
+        {
+          "feature": "loan_int_rate",
+          "shap_value": 0.1628,
+          "feature_value": 19.41
+        },
+        {
+          "feature": "person_income",
+          "shap_value": 0.0964,
+          "feature_value": 20800.0
+        }
+      ]
+    },
+    {
+      "row_id": 9,
+      "predicted": 0,
+      "actual": 1,
+      "top_features": [
+        {
+          "feature": "loan_grade",
+          "shap_value": 0.1473,
+          "feature_value": 3.0
+        },
+        {
+          "feature": "loan_intent",
+          "shap_value": -0.0886,
+          "feature_value": 4.0
+        },
+        {
+          "feature": "person_income",
+          "shap_value": -0.0607,
+          "feature_value": 75000.0
+        }
+      ]
+    },
+    {
+      "row_id": 10,
+      "predicted": 0,
+      "actual": 1,
+      "top_features": [
+        {
+          "feature": "person_income",
+          "shap_value": 0.0671,
+          "feature_value": 20400.0
+        },
+        {
+          "feature": "loan_grade",
+          "shap_value": -0.0589,
+          "feature_value": 2.0
+        },
+        {
+          "feature": "loan_percent_income",
+          "shap_value": -0.0563,
+          "feature_value": 0.16
+        }
+      ]
+    },
+    {
+      "row_id": 11,
+      "predicted": 0,
+      "actual": 1,
+      "top_features": [
+        {
+          "feature": "person_income",
+          "shap_value": 0.251,
+          "feature_value": 14400.0
+        },
+        {
+          "feature": "loan_percent_income",
+          "shap_value": -0.182,
+          "feature_value": 0.1
+        },
+        {
+          "feature": "loan_amnt",
+          "shap_value": -0.0447,
+          "feature_value": 1500.0
+        }
+      ]
+    },
+    {
+      "row_id": 12,
+      "predicted": 0,
+      "actual": 1,
+      "top_features": [
+        {
+          "feature": "person_home_ownership",
+          "shap_value": -0.2659,
+          "feature_value": 0.0
+        },
+        {
+          "feature": "loan_percent_income",
+          "shap_value": 0.2129,
+          "feature_value": 0.34
+        },
+        {
+          "feature": "loan_grade",
+          "shap_value": -0.0449,
+          "feature_value": 0.0
+        }
+      ]
+    },
+    {
+      "row_id": 13,
+      "predicted": 0,
+      "actual": 1,
+      "top_features": [
+        {
+          "feature": "loan_percent_income",
+          "shap_value": -0.07,
+          "feature_value": 0.19
+        },
+        {
+          "feature": "loan_grade",
+          "shap_value": -0.0613,
+          "feature_value": 1.0
+        },
+        {
+          "feature": "loan_intent",
+          "shap_value": 0.0315,
+          "feature_value": 0.0
+        }
+      ]
+    },
+    {
+      "row_id": 14,
+      "predicted": 0,
+      "actual": 1,
+      "top_features": [
+        {
+          "feature": "person_income",
+          "shap_value": 0.1235,
+          "feature_value": 24000.0
+        },
+        {
+          "feature": "loan_amnt",
+          "shap_value": 0.0669,
+          "feature_value": 1375.0
+        },
+        {
+          "feature": "loan_intent",
+          "shap_value": 0.0493,
+          "feature_value": 3.0
+        }
+      ]
+    },
+    {
+      "row_id": 15,
+      "predicted": 1,
+      "actual": 0,
+      "top_features": [
+        {
+          "feature": "loan_grade",
+          "shap_value": 0.1936,
+          "feature_value": 3.0
+        },
+        {
+          "feature": "person_income",
+          "shap_value": 0.1715,
+          "feature_value": 32000.0
+        },
+        {
+          "feature": "loan_int_rate",
+          "shap_value": 0.1212,
+          "feature_value": 17.27
+        }
+      ]
+    },
+    {
+      "row_id": 16,
+      "predicted": 0,
+      "actual": 1,
+      "top_features": [
+        {
+          "feature": "person_income",
+          "shap_value": -0.0676,
+          "feature_value": 126996.0
+        },
+        {
+          "feature": "loan_grade",
+          "shap_value": -0.0581,
+          "feature_value": 2.0
+        },
+        {
+          "feature": "loan_percent_income",
+          "shap_value": -0.0557,
+          "feature_value": 0.04
+        }
+      ]
+    },
+    {
+      "row_id": 17,
+      "predicted": 0,
+      "actual": 1,
+      "top_features": [
+        {
+          "feature": "loan_intent",
+          "shap_value": 0.1317,
+          "feature_value": 2.0
+        },
+        {
+          "feature": "person_home_ownership",
+          "shap_value": 0.0572,
+          "feature_value": 3.0
+        },
+        {
+          "feature": "loan_percent_income",
+          "shap_value": -0.0566,
+          "feature_value": 0.15
+        }
+      ]
+    },
+    {
+      "row_id": 18,
+      "predicted": 0,
+      "actual": 1,
+      "top_features": [
+        {
+          "feature": "loan_int_rate",
+          "shap_value": 0.1486,
+          "feature_value": 15.23
+        },
+        {
+          "feature": "loan_grade",
+          "shap_value": -0.1266,
+          "feature_value": 2.0
+        },
+        {
+          "feature": "loan_percent_income",
+          "shap_value": -0.0557,
+          "feature_value": 0.19
+        }
+      ]
+    },
+    {
+      "row_id": 19,
+      "predicted": 0,
+      "actual": 1,
+      "top_features": [
+        {
+          "feature": "person_income",
+          "shap_value": 0.0986,
+          "feature_value": 32000.0
+        },
+        {
+          "feature": "loan_percent_income",
+          "shap_value": -0.054,
+          "feature_value": 0.08
+        },
+        {
+          "feature": "person_home_ownership",
+          "shap_value": -0.0367,
+          "feature_value": 0.0
+        }
+      ]
+    }
+  ]
+}

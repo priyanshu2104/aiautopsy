@@ -1,0 +1,52 @@
+{
+  "agent": "investigator",
+  "version": "1.0",
+  "model": "Telco Customer Churn Predictor",
+  "total_failures": 310,
+  "top_features": [
+    {
+      "feature": "Contract",
+      "mean_abs_shap": 0.0816
+    },
+    {
+      "feature": "tenure",
+      "mean_abs_shap": 0.0687
+    },
+    {
+      "feature": "OnlineSecurity",
+      "mean_abs_shap": 0.0483
+    }
+  ],
+  "failure_patterns": [
+    {
+      "feature": "Contract",
+      "range": "(-0.002, 0.4]",
+      "failure_count": 259,
+      "failure_rate": 0.835
+    },
+    {
+      "feature": "Contract",
+      "range": "(0.8, 1.2]",
+      "failure_count": 43,
+      "failure_rate": 0.139
+    },
+    {
+      "feature": "Contract",
+      "range": "(1.6, 2.0]",
+      "failure_count": 8,
+      "failure_rate": 0.026
+    },
+    {
+      "feature": "tenure",
+      "range": "(0.932, 14.6]",
+      "failure_count": 152,
+      "failure_rate": 0.49
+    },
+    {
+      "feature": "tenure",
+      "range": "(14.6, 28.2]",
+      "failure_count": 62,
+      "failure_rate": 0.2
+    }
+  ]
+}

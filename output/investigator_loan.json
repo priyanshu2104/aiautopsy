@@ -1,0 +1,52 @@
+{
+  "agent": "investigator",
+  "version": "1.0",
+  "model": "Credit Risk Loan Classifier",
+  "total_failures": 422,
+  "top_features": [
+    {
+      "feature": "loan_grade",
+      "mean_abs_shap": 0.079
+    },
+    {
+      "feature": "loan_percent_income",
+      "mean_abs_shap": 0.0727
+    },
+    {
+      "feature": "person_home_ownership",
+      "mean_abs_shap": 0.058
+    }
+  ],
+  "failure_patterns": [
+    {
+      "feature": "loan_grade",
+      "range": "(-0.005, 1.0]",
+      "failure_count": 191,
+      "failure_rate": 0.453
+    },
+    {
+      "feature": "loan_grade",
+      "range": "(1.0, 2.0]",
+      "failure_count": 143,
+      "failure_rate": 0.339
+    },
+    {
+      "feature": "loan_grade",
+      "range": "(2.0, 3.0]",
+      "failure_count": 57,
+      "failure_rate": 0.135
+    },
+    {
+      "feature": "loan_grade",
+      "range": "(3.0, 4.0]",
+      "failure_count": 22,
+      "failure_rate": 0.052
+    },
+    {
+      "feature": "loan_grade",
+      "range": "(4.0, 5.0]",
+      "failure_count": 9,
+      "failure_rate": 0.021
+    }
+  ]
+}
