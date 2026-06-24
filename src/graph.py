@@ -1,0 +1,157 @@
+"""
+LangGraph orchestrator for AI Autopsy.
+
+Defines:
+  - AutopsyState: shared state flowing through all 3 agents
+  - investigator_node: wraps InvestigatorPipeline as an agent node
+  - build_graph(): compiles and returns the runnable LangGraph app
+
+Usage:
+    from src.graph import build_graph
+    app = build_graph()
+    result = app.invoke({
+        "model_path": "models/fraud_rf.pkl",
+        "csv_path": "data/mispredictions/fraud_wrong.csv",
+        "model_name": "Fraud Detector",
+        "investigator_output": None,
+        "counterfactual_output": None,
+        "report_output": None,
+        "error": None
+    })
+    print(result["investigator_output"])
+"""
+import logging
+from typing import TypedDict, Optional
+from langgraph.graph import StateGraph, END
+
+logger = logging.getLogger(__name__)
+
+
+# ── Shared state ──────────────────────────────────────────────────────────────
+
+class AutopsyState(TypedDict):
+    """
+    Flows through every agent node.
+    Each agent reads from it and writes its output back into it.
+    Never mutate state directly — always return {**state, key: value}
+    """
+    model_path: str
+    csv_path: str
+    model_name: str
+    investigator_output: Optional[dict]
+    counterfactual_output: Optional[dict]
+    report_output: Optional[dict]
+    error: Optional[str]
+
+
+# ── Agent nodes ───────────────────────────────────────────────────────────────
+
+def investigator_node(state: AutopsyState) -> AutopsyState:
+    """Agent 1: Runs SHAP analysis on mispredictions."""
+    logger.info(f"Agent 1 starting — model: {state['model_name']}")
+    try:
+        from src.investigator import InvestigatorPipeline
+        result = InvestigatorPipeline().run(
+            model_path=state["model_path"],
+            mispredictions_path=state["csv_path"],
+            model_name=state["model_name"],
+        )
+        logger.info(
+            f"Agent 1 complete — {result.get('total_failures', 0)} failures found")
+        return {**state, "investigator_output": result}
+    except Exception as e:
+        logger.error(f"Agent 1 failed: {e}")
+        return {**state, "error": f"investigator_node failed: {str(e)}"}
+
+
+def counterfactual_node(state: AutopsyState) -> AutopsyState:
+    """Agent 2: Counterfactual generation (Week 3 — placeholder for now)."""
+    logger.info("Agent 2 — counterfactual (placeholder for Week 3)")
+    return {
+        **state,
+        "counterfactual_output": {
+            "agent": "counterfactual",
+            "version": "placeholder",
+            "attempted": 0,
+            "found": 0,
+            "success_rate": 0.0,
+            "avg_features_to_flip": 0.0,
+            "examples": [],
+            "note": "Agent 2 not implemented yet — coming in Week 3"
+        }
+    }
+
+
+def reporter_node(state: AutopsyState) -> AutopsyState:
+    """Agent 3: LLM report generation (Week 5 — placeholder for now)."""
+    logger.info("Agent 3 — reporter (placeholder for Week 5)")
+    return {
+        **state,
+        "report_output": {
+            "agent": "reporter",
+            "version": "placeholder",
+            "note": "Agent 3 not implemented yet — coming in Week 5"
+        }
+    }
+
+
+# ── Routing ───────────────────────────────────────────────────────────────────
+
+def should_continue(state: AutopsyState) -> str:
+    """
+    After Agent 1 runs, decide what to do next.
+    Returns 'counterfactual' to continue or 'end' to stop.
+    """
+    if state.get("error"):
+        logger.warning(f"Stopping due to error: {state['error']}")
+        return "end"
+
+    inv = state.get("investigator_output", {})
+    if not inv or inv.get("total_failures", 0) == 0:
+        logger.info("No failures found — skipping remaining agents")
+        return "end"
+
+    return "counterfactual"
+
+
+# ── Graph builder ─────────────────────────────────────────────────────────────
+
+def build_graph():
+    """
+    Builds and compiles the LangGraph state machine.
+    Returns a compiled app ready for app.invoke({...})
+    """
+    graph = StateGraph(AutopsyState)
+
+    graph.add_node("investigator",   investigator_node)
+    graph.add_node("counterfactual", counterfactual_node)
+    graph.add_node("reporter",       reporter_node)
+
+    graph.set_entry_point("investigator")
+
+    graph.add_conditional_edges(
+        "investigator",
+        should_continue,
+        {"counterfactual": "counterfactual", "end": END}
+    )
+    graph.add_edge("counterfactual", "reporter")
+    graph.add_edge("reporter", END)
+
+    return graph.compile()
+
+
+def make_initial_state(
+    model_path: str,
+    csv_path: str,
+    model_name: str = "Unknown Model"
+) -> AutopsyState:
+    """Helper to create a clean initial state dict."""
+    return {
+        "model_path": model_path,
+        "csv_path": csv_path,
+        "model_name": model_name,
+        "investigator_output": None,
+        "counterfactual_output": None,
+        "report_output": None,
+        "error": None,
+    }
