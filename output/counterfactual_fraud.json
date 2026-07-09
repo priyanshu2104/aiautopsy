@@ -1,0 +1,147 @@
+{
+  "agent": "counterfactual",
+  "version": "1.0",
+  "method": "manual_perturbation",
+  "attempted": 10,
+  "found": 8,
+  "success_rate": 0.8,
+  "avg_features_to_flip": 1.0,
+  "examples": [
+    {
+      "features_changed": [
+        "V14"
+      ],
+      "delta": {
+        "V14": -5.0436
+      },
+      "original_value": {
+        "V14": 0.1413
+      },
+      "counterfactual_value": {
+        "V14": -4.9023
+      },
+      "pct_change": 50.0,
+      "prediction_flipped": true,
+      "row_id": 1
+    },
+    {
+      "features_changed": [
+        "V14"
+      ],
+      "delta": {
+        "V14": 3.5305
+      },
+      "original_value": {
+        "V14": -3.8381
+      },
+      "counterfactual_value": {
+        "V14": -0.3076
+      },
+      "pct_change": 35.0,
+      "prediction_flipped": true,
+      "row_id": 2
+    },
+    {
+      "features_changed": [
+        "V14"
+      ],
+      "delta": {
+        "V14": -1.0087
+      },
+      "original_value": {
+        "V14": -2.9542
+      },
+      "counterfactual_value": {
+        "V14": -3.9629
+      },
+      "pct_change": 10.0,
+      "prediction_flipped": true,
+      "row_id": 3
+    },
+    {
+      "features_changed": [
+        "V14"
+      ],
+      "delta": {
+        "V14": -5.0436
+      },
+      "original_value": {
+        "V14": -0.1421
+      },
+      "counterfactual_value": {
+        "V14": -5.1857
+      },
+      "pct_change": 50.0,
+      "prediction_flipped": true,
+      "row_id": 4
+    },
+    {
+      "features_changed": [
+        "V14"
+      ],
+      "delta": {
+        "V14": -5.0436
+      },
+      "original_value": {
+        "V14": -0.4985
+      },
+      "counterfactual_value": {
+        "V14": -5.5421
+      },
+      "pct_change": 50.0,
+      "prediction_flipped": true,
+      "row_id": 5
+    },
+    {
+      "features_changed": [
+        "V17"
+      ],
+      "delta": {
+        "V17": -4.6203
+      },
+      "original_value": {
+        "V17": 1.68
+      },
+      "counterfactual_value": {
+        "V17": -2.9403
+      },
+      "pct_change": 35.0,
+      "prediction_flipped": true,
+      "row_id": 7
+    },
+    {
+      "features_changed": [
+        "V14"
+      ],
+      "delta": {
+        "V14": -1.0087
+      },
+      "original_value": {
+        "V14": -3.6888
+      },
+      "counterfactual_value": {
+        "V14": -4.6976
+      },
+      "pct_change": 10.0,
+      "prediction_flipped": true,
+      "row_id": 8
+    },
+    {
+      "features_changed": [
+        "V14"
+      ],
+      "delta": {
+        "V14": -3.5305
+      },
+      "original_value": {
+        "V14": -0.8199
+      },
+      "counterfactual_value": {
+        "V14": -4.3504
+      },
+      "pct_change": 35.0,
+      "prediction_flipped": true,
+      "row_id": 9
+    }
+  ]
+}

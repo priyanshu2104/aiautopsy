@@ -127,6 +127,63 @@ function InvestigatorResults({ data }) {
   )
 }
 
+function CounterfactualResults({ data }) {
+  if (!data || data.found === 0) return null
+
+  // Filter out placeholder from week 2
+  if (data.version === 'placeholder') return null
+
+  return (
+    <div style={styles.resultsCard}>
+      <h3 style={styles.cardTitle}>
+        Agent 2 results — counterfactual analysis
+      </h3>
+
+      <div style={styles.statRow}>
+        <div style={styles.stat}>
+          <div style={styles.statNum}>{data.found}</div>
+          <div style={styles.statLabel}>Found</div>
+        </div>
+        <div style={styles.stat}>
+          <div style={styles.statNum}>
+            {(data.success_rate * 100).toFixed(0)}%
+          </div>
+          <div style={styles.statLabel}>Success rate</div>
+        </div>
+        <div style={styles.stat}>
+          <div style={styles.statNum}>{data.avg_features_to_flip}</div>
+          <div style={styles.statLabel}>Avg features to flip</div>
+        </div>
+      </div>
+
+      <h4 style={styles.subTitle}>What would have fixed each prediction?</h4>
+      {data.examples.slice(0, 5).map((ex, i) => {
+        const feat = ex.features_changed[0]
+        const delta = ex.delta[feat]
+        const orig = ex.original_value[feat]
+        const cfVal = ex.counterfactual_value[feat]
+        const dir = delta > 0 ? 'increased' : 'decreased'
+
+        return (
+          <div key={i} style={styles.cfBox}>
+            <span style={styles.cfFeat}>{feat}</span>
+            {' '}{dir} by{' '}
+            <strong>{Math.abs(delta).toFixed(2)}</strong>
+            {' '}({ex.pct_change}% change,{' '}
+            {orig.toFixed(2)} → {cfVal.toFixed(2)})
+          </div>
+        )
+      })}
+
+      <p style={styles.cfNote}>
+        {data.avg_features_to_flip <= 1.5
+          ? '⚠️ Model is brittle in this region — small changes flip predictions'
+          : '✓ Model is moderately robust — larger changes needed to flip predictions'}
+      </p>
+    </div>
+  )
+}
+
 // ── Main App ──────────────────────────────────────────────────────────────────
 
 export default function App() {
@@ -309,7 +366,10 @@ export default function App() {
 
         {/* Results */}
         {results?.investigator && (
-          <InvestigatorResults data={results.investigator} />
+          <>
+            <InvestigatorResults data={results.investigator} />
+            <CounterfactualResults data={results?.counterfactual} />
+          </>
         )}
 
       </div>
@@ -508,5 +568,24 @@ const styles = {
     borderRadius: 20,
     fontSize: 11,
     fontWeight: 500,
+  },
+  cfBox: {
+    background: '#F0FDF4',
+    borderLeft: '3px solid #1D9E75',
+    borderRadius: '0 6px 6px 0',
+    padding: '8px 12px',
+    margin: '6px 0',
+    fontSize: 13,
+    color: '#374151',
+  },
+  cfFeat: {
+    fontWeight: 600,
+    color: '#1D9E75',
+  },
+  cfNote: {
+    fontSize: 12,
+    color: '#6B7280',
+    marginTop: 12,
+    fontStyle: 'italic',
   },
 }

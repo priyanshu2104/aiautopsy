@@ -65,21 +65,43 @@ def investigator_node(state: AutopsyState) -> AutopsyState:
 
 
 def counterfactual_node(state: AutopsyState) -> AutopsyState:
-    """Agent 2: Counterfactual generation (Week 3 — placeholder for now)."""
-    logger.info("Agent 2 — counterfactual (placeholder for Week 3)")
-    return {
-        **state,
-        "counterfactual_output": {
-            "agent": "counterfactual",
-            "version": "placeholder",
-            "attempted": 0,
-            "found": 0,
-            "success_rate": 0.0,
-            "avg_features_to_flip": 0.0,
-            "examples": [],
-            "note": "Agent 2 not implemented yet — coming in Week 3"
+    """
+    Agent 2: Generates counterfactuals for top mispredictions.
+    Uses InvestigatorPipeline output (from Agent 1) to prioritise
+    which features to perturb.
+    """
+    logger.info("Agent 2 starting — counterfactual generation")
+    try:
+        from src.counterfactual import CounterfactualPipeline
+        result = CounterfactualPipeline().run(
+            model_path=state["model_path"],
+            mispredictions_path=state["csv_path"],
+            investigator_output=state.get("investigator_output", {}),
+            top_n=10,
+        )
+        logger.info(
+            f"Agent 2 complete — "
+            f"{result.get('found', 0)}/{result.get('attempted', 0)} "
+            f"counterfactuals found"
+        )
+        return {**state, "counterfactual_output": result}
+
+    except Exception as e:
+        logger.error(f"Agent 2 failed: {e}")
+        # Don't fail the whole pipeline if CF fails
+        # Return empty result so Agent 3 can still run
+        return {
+            **state,
+            "counterfactual_output": {
+                "agent": "counterfactual",
+                "error": str(e),
+                "attempted": 0,
+                "found": 0,
+                "success_rate": 0.0,
+                "avg_features_to_flip": 0.0,
+                "examples": [],
+            }
         }
-    }
 
 
 def reporter_node(state: AutopsyState) -> AutopsyState:
