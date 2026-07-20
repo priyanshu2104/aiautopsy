@@ -1,0 +1,26 @@
+[
+  {
+    "model": "Credit Card Fraud Detector",
+    "agent1_time_s": 0.05,
+    "agent2_time_s": 0.86,
+    "total_time_s": 0.91,
+    "total_failures": 18,
+    "cf_success_rate": 80.0
+  },
+  {
+    "model": "Telco Churn Predictor",
+    "agent1_time_s": 5.14,
+    "agent2_time_s": 0.32,
+    "total_time_s": 5.46,
+    "total_failures": 310,
+    "cf_success_rate": 60.0
+  },
+  {
+    "model": "Credit Risk Loan Classifier",
+    "agent1_time_s": 10.74,
+    "agent2_time_s": 0.3,
+    "total_time_s": 11.04,
+    "total_failures": 422,
+    "cf_success_rate": 80.0
+  }
+]

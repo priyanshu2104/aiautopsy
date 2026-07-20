@@ -21,6 +21,7 @@ Usage:
     print(result["investigator_output"])
 """
 import logging
+import time
 from typing import TypedDict, Optional
 from langgraph.graph import StateGraph, END
 
@@ -42,6 +43,7 @@ class AutopsyState(TypedDict):
     counterfactual_output: Optional[dict]
     report_output: Optional[dict]
     error: Optional[str]
+    timing: Optional[dict]
 
 
 # ── Agent nodes ───────────────────────────────────────────────────────────────
@@ -49,6 +51,7 @@ class AutopsyState(TypedDict):
 def investigator_node(state: AutopsyState) -> AutopsyState:
     """Agent 1: Runs SHAP analysis on mispredictions."""
     logger.info(f"Agent 1 starting — model: {state['model_name']}")
+    t0 = time.time()
     try:
         from src.investigator import InvestigatorPipeline
         result = InvestigatorPipeline().run(
@@ -56,12 +59,19 @@ def investigator_node(state: AutopsyState) -> AutopsyState:
             mispredictions_path=state["csv_path"],
             model_name=state["model_name"],
         )
+        elapsed = round(time.time() - t0, 2)
         logger.info(
-            f"Agent 1 complete — {result.get('total_failures', 0)} failures found")
-        return {**state, "investigator_output": result}
+            f"Agent 1 complete — {result.get('total_failures', 0)} failures found"
+            f"failures in {elapsed}s")
+        timing = state.get("timing") or {}
+        timing["agent1_s"] = elapsed
+        return {**state, "investigator_output": result, "timing": timing}
+    
     except Exception as e:
-        logger.error(f"Agent 1 failed: {e}")
-        return {**state, "error": f"investigator_node failed: {str(e)}"}
+        elapsed = round(time.time() - t0, 2)
+        logger.error(f"[Agent 1] Failed after {elapsed}s: {e}")
+        return {**state,
+                "error": f"Agent 1 (investigator) failed: {str(e)}"}
 
 
 def counterfactual_node(state: AutopsyState) -> AutopsyState:
@@ -71,6 +81,7 @@ def counterfactual_node(state: AutopsyState) -> AutopsyState:
     which features to perturb.
     """
     logger.info("Agent 2 starting — counterfactual generation")
+    t0 = time.time()
     try:
         from src.counterfactual import CounterfactualPipeline
         result = CounterfactualPipeline().run(
@@ -79,15 +90,18 @@ def counterfactual_node(state: AutopsyState) -> AutopsyState:
             investigator_output=state.get("investigator_output", {}),
             top_n=10,
         )
+        elapsed = round(time.time() - t0, 2)
         logger.info(
             f"Agent 2 complete — "
             f"{result.get('found', 0)}/{result.get('attempted', 0)} "
-            f"counterfactuals found"
-        )
-        return {**state, "counterfactual_output": result}
+            f"CFs in {elapsed}s")
+        timing = state.get("timing") or {}
+        timing["agent2_s"] = elapsed
+        return {**state, "counterfactual_output": result, "timing": timing}
 
     except Exception as e:
-        logger.error(f"Agent 2 failed: {e}")
+        elapsed = round(time.time() - t0, 2)
+        logger.error(f"[Agent 2] Failed after {elapsed}s: {e}")
         # Don't fail the whole pipeline if CF fails
         # Return empty result so Agent 3 can still run
         return {
@@ -119,7 +133,7 @@ def reporter_node(state: AutopsyState) -> AutopsyState:
 
 # ── Routing ───────────────────────────────────────────────────────────────────
 
-def should_continue(state: AutopsyState) -> str:
+def should_run_counterfactual(state: AutopsyState) -> str:
     """
     After Agent 1 runs, decide what to do next.
     Returns 'counterfactual' to continue or 'end' to stop.
@@ -134,6 +148,11 @@ def should_continue(state: AutopsyState) -> str:
         return "end"
 
     return "counterfactual"
+
+def should_run_reporter(state: AutopsyState) -> str:
+    """After Agent 2: always run reporter (even if CF found nothing)."""
+    # CF errors are non-fatal — reporter still runs
+    return "reporter"
 
 
 # ── Graph builder ─────────────────────────────────────────────────────────────
@@ -153,8 +172,13 @@ def build_graph():
 
     graph.add_conditional_edges(
         "investigator",
-        should_continue,
+        should_run_counterfactual,
         {"counterfactual": "counterfactual", "end": END}
+    )
+    graph.add_conditional_edges(
+        "counterfactual",
+        should_run_reporter,
+        {"reporter": "reporter"}
     )
     graph.add_edge("counterfactual", "reporter")
     graph.add_edge("reporter", END)
@@ -176,4 +200,5 @@ def make_initial_state(
         "counterfactual_output": None,
         "report_output": None,
         "error": None,
+        "timing": {},
     }
